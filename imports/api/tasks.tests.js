@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 import { assert } from 'chai';
 
-import { Tasks } from './tasks.js';
+import { Groups } from './tasks.js';
 
 if (Meteor.isServer) {
     describe('Tasks', () => {
@@ -10,8 +10,8 @@ if (Meteor.isServer) {
             let taskId;
 
             beforeEach(() => {
-                Tasks.remove({});
-                taskId = Tasks.insert({
+                Groups.remove({});
+                taskId = Groups.insert({
                     text: 'test task',
                     createdAt: new Date(),
                     owner: userId,
@@ -28,7 +28,7 @@ if (Meteor.isServer) {
                 deleteTask.apply(invocation, [taskId]);
 
                 // Verify that the method does what we expected
-                assert.equal(Tasks.find().count(), 0);
+                assert.equal(Groups.find().count(), 0);
 
             });
         });

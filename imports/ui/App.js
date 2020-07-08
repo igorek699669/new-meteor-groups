@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Tasks } from '../api/tasks.js';
+import { Groups } from '../api/groups.js';
 import { Meteor } from 'meteor/meteor';
-import AccountsUIWrapper from './AccountsUIWrapper.js';
+import GroupsPage from './pages/GroupsPage';
+import AddGroupPage from './pages/AddGroupPage';
+import {BrowserRouter as Router , Switch , NavLink, Route} from 'react-router-dom';
 
-import Task from './Task.js';
 
 // App component - represents the whole app
 class App extends Component {
@@ -33,63 +34,24 @@ class App extends Component {
         ReactDOM.findDOMNode(this.refs.textInput).value = '';
 
     }
-    renderTasks() {
-        let filteredTasks = this.props.tasks;
-        if (this.state.hideCompleted) {
-            filteredTasks = filteredTasks.filter(task => !task.checked);
-        }
-        return filteredTasks.map((task) => {
-            const currentUserId = this.props.currentUser && this.props.currentUser._id;
-            const showPrivateButton = task.owner === currentUserId;
-
-            return (
-                <Task
-                    key={task._id}
-                    task={task}
-                    showPrivateButton={showPrivateButton}
-                />
-            );
-        });
-    }
 
     render() {
         return (
-            <div className="container">
-                <header>
-                    <h1>Todo List ({this.props.incompleteCount})</h1>
-                </header>
-                <label className="hide-completed">
-                    <input
-                        type="checkbox"
-                        readOnly
-                        checked={this.state.hideCompleted}
-                        onClick={this.toggleHideCompleted.bind(this)}
-                    />
-                    Hide Completed Tasks
-                </label>
-                <AccountsUIWrapper />
-                { this.props.currentUser ?
-                    <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-                        <input
-                            type="text"
-                            ref="textInput"
-                            placeholder="Type to add new tasks"
-                        />
-                    </form> : ''
-                }
-
-                <ul>
-                {this.renderTasks()}
-                </ul>
-            </div>
+            <>  <Router>
+                    <Switch>
+                        <Route exact component={GroupsPage} path='/'/>
+                        <Route exact component={AddGroupPage} path='/add-group-page'/>
+                    </Switch>
+                </Router>
+            </>
         );
     }
 }
 export default withTracker(() => {
     Meteor.subscribe('tasks');
     return {
-        tasks: Tasks.find({},{ sort: { createdAt: -1 } }).fetch(),
-        incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
+        tasks: Groups.find({},{ sort: { createdAt: -1 } }).fetch(),
+        incompleteCount: Groups.find({ checked: { $ne: true } }).count(),
         currentUser: Meteor.user(),
     };
 })(App);

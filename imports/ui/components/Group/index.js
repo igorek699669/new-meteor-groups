@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Groups } from '../../../api/groups.js';
 import { Meteor } from 'meteor/meteor';
-import classnames from 'classnames';
 
 export default class Group extends Component {
+    handleClick = (e) => {
+
+    };
     render() {
         return (
-            <div className="group-item">
+            <div className="group-item" onClick={this.handleClick}>
                 <div className="image">
-                    <img src="" alt=""/>
+                    <img src={this.props.group.file} alt=""/>
                 </div>
                 <div className="r-column">
                     <div className="r-column__head-text">

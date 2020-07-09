@@ -9,7 +9,9 @@ class AddGroupPage extends Component {
         e.preventDefault();
         let name = ReactDOM.findDOMNode(this.refs.name).value.trim();
         let description = ReactDOM.findDOMNode(this.refs.description).value.trim();
-        Meteor.call('groups.insert', name , description);
+        let file = ReactDOM.findDOMNode(this.refs.fileloader).files[0];
+        let fileUrl = window.URL.createObjectURL(file);
+        Meteor.call('groups.insert', name , description , fileUrl);
         ReactDOM.findDOMNode(this.refs.name).value= '';
         ReactDOM.findDOMNode(this.refs.description).value = '';
         this.props.history.push('/');
@@ -22,8 +24,9 @@ class AddGroupPage extends Component {
                         <div className="form-wrapper">
                             <form onSubmit={this.addGroupHandler}>
                                 <div className="form-wrapper__head-text">Создать сообщество</div>
-                                <input type="text" className="input" placeholder='Название' ref='name'/>
-                                <input type="text" className="input" placeholder='Описание'ref='description'/>
+                                <input type="text" className="input" placeholder='Название' ref='name'/> <br/>
+                                <input type="text" className="input" placeholder='Описание'ref='description'/> <br/>
+                                <input type='file' className='file-loader' ref='fileloader'/> <br/>
                                 <button className="btn">Создать</button>
                             </form>
                         </div>

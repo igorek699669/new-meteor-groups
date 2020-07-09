@@ -10,7 +10,7 @@ if (Meteor.isServer) {
     });
 }
 Meteor.methods({
-    'groups.insert'(name, description) {
+    'groups.insert'(name, description, file) {
         check(name, String);
         check(description, String);
 
@@ -22,6 +22,7 @@ Meteor.methods({
         Groups.insert({
             name,
             description,
+            file,
             createdAt: new Date(),
             // owner: this.userId,
             // username: Meteor.users.findOne(this.userId).username,

@@ -42,6 +42,6 @@ class GroupsPage extends Component {
 export default withTracker(() => {
     Meteor.subscribe('groups');
     return {
-        groups: Groups.find({}).fetch()
+        groups: Groups.find({},{ sort: { createdAt: -1 }}).fetch();
     };
 })(GroupsPage);

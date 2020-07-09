@@ -5,7 +5,6 @@ import Group from "../../components/Group";
 import {Link} from "react-router-dom";
 import {Groups} from "../../../api/groups";
 
-
 class GroupsPage extends Component {
     renderGroups() {
         return this.props.groups.map((group) => {
@@ -26,7 +25,9 @@ class GroupsPage extends Component {
                             <div className="tab-buttons-wrapper">
                                 <button className="tab-buttons-wrapper__button">Все сообщества</button>
                                 <button className="tab-buttons-wrapper__button">Мои сообщества</button>
-                                <Link to='/add-group-page'><button className="tab-buttons-wrapper__button">Создать</button></Link>
+                                <Link to='/add-group-page'>
+                                    <button className="tab-buttons-wrapper__button">Создать</button>
+                                </Link>
                             </div>
                             <input type="text" className="search-input" placeholder='Поиск сообществ...'/>
                             <div className="tab-content all-groups">
@@ -42,6 +43,6 @@ class GroupsPage extends Component {
 export default withTracker(() => {
     Meteor.subscribe('groups');
     return {
-        groups: Groups.find({},{ sort: { createdAt: -1 }}).fetch();
-    };
+        groups: Groups.find({},{ sort: { createdAt: -1 }}).fetch()
+    }
 })(GroupsPage);

@@ -39,3 +39,4 @@ react-meteor-data
 typescript@3.7.6
 meteortesting:mocha
 static-html
+accounts-ui

@@ -5,6 +5,7 @@ import {withTracker} from 'meteor/react-meteor-data';
 
 class OneGroupPage extends Component {
     render() {
+        {console.log(this.props)}
         return(
             <>
                 <section className="onegroup">
@@ -60,6 +61,6 @@ class OneGroupPage extends Component {
 export default withTracker(() => {
     Meteor.subscribe('groups');
     return {
-        groups: Groups.find({},{ sort: { createdAt: -1 }}).fetch()
+
     }
 })(OneGroupPage);

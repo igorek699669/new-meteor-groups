@@ -36,7 +36,7 @@ didericis:callpromise-mixin
 aldeed:collection2
 react-template-helper
 react-meteor-data
-typescript@3.7.6
+typescript
 meteortesting:mocha
 static-html
 accounts-ui

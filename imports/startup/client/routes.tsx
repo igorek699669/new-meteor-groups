@@ -3,8 +3,7 @@ import { mount } from 'react-mounter';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import { GroupsPage } from '../../ui/pages/Groups';
 import { GroupPage } from '../../ui/pages/Group';
-// import AddGroupPage from '../../ui/pages/AddGroupPage';
-// import OneGroupPage from '../../ui/pages/OneGroupPage';
+import { AddGroupPage } from '../../ui/pages/AddGroup';
 
 const MainLayout = ({ content }) => (
   <div>
@@ -33,4 +32,13 @@ FlowRouter.route('/group/:groupId', {
       content: () => <GroupPage />,
     });
   },
+});
+
+FlowRouter.route('/add-group-page', {
+    name: 'addGroup',
+    action() {
+        mount(MainLayout, {
+            content: () => <AddGroupPage />,
+        });
+    },
 });

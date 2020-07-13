@@ -2,8 +2,6 @@ import React from 'react';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 export const Group = ({ group }) => {
-    console.log(group);
-
     return (
         <div className="group-item" onClick={() => {
             FlowRouter.go('group', { groupId: group._id });

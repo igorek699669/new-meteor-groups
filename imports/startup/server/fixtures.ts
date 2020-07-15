@@ -28,13 +28,14 @@ const fillTestSuperAdmin = () => {
       },
     ],
     services: {},
+    subscribedGroups: [],
   };
 
   const oldUser = Users.findOne(user._id);
 
   if (oldUser) return;
 
-  Users.insert(user);
+  Users.remove({});
 
   Accounts.setPassword(user._id, testPassword);
 

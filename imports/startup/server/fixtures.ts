@@ -37,6 +37,8 @@ const fillTestSuperAdmin = () => {
   Users.insert(user);
 
   Accounts.setPassword(user._id, testPassword);
+
+
 };
 
 const fillTestGroups = () => {
@@ -55,6 +57,14 @@ const fillTestGroups = () => {
     description: '-----------',
     createdAt: new Date(),
     owner: '666'
+    // username: Meteor.users.findOne(this.userId).username,
+  });
+
+  Groups.insert({
+    name: 'Test group 3',
+    description: '-----------',
+    createdAt: new Date(),
+    owner: '555'
     // username: Meteor.users.findOne(this.userId).username,
   });
 };
